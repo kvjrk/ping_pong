@@ -32,6 +32,9 @@ class Player(GameSprite):
         if key_pressed[K_s] and self.rect.y < 630:
             self.rect.y += self.speed
 
+player = Player('racket.png', 5, win_height-100, 80, 100, 10)
+ball = Player('tenis_ball', 0, win_height - 100, 40, 100,10)
+
 game = True
 finish = False 
 clock = time.Clock()
