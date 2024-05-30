@@ -72,7 +72,7 @@ while game:
             finish = True
             window.blit(lose2, (200, 200))
 
-        if sprite.collide_rect(racket1, ball) or sprite.collide_rect(racket1, ball):
+        if sprite.collide_rect(racket1, ball) or sprite.collide_rect(racket2, ball):
             speed_x *= -1
             speed_y *= -1
         
