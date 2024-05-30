@@ -32,17 +32,50 @@ class Player(GameSprite):
         if key_pressed[K_s] and self.rect.y < 630:
             self.rect.y += self.speed
 
-player = Player('racket.png', 5, win_height-100, 80, 100, 10)
-ball = Player('tenis_ball', 0, win_height - 100, 40, 100,10)
+racket1 = Player('racket.png', 30, win_height-100, 8, 100, 150)
+racket1 = Player('racket.png', 520, win_height-100, 8, 100, 150)
+ball = Player('tenis_ball', 200, 200, 4, 50,50)
 
 game = True
 finish = False 
 clock = time.Clock()
 FPS = 60
 
+font.init()
+font = font.Font(None, 35)
+lose1 = font.render('PLAYER 1 LOSE!', True, (180,0,0))
+lose2 = font.render('PLAYER 2 LOSE!', True, (180,0,0))
+
+speed_x = 3
+speed_y = 3
+
 while game:
     for e in event.get():
         if e.type == QUIT:
             game = False
+    if finish != True:
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
+        racket1.update_l()
+        racket1.reset()
+        racket2.update_r()
+        racket2.reset()
+        ball.update()
+        ball.draw(window)
+
+        if ball.rect.y > win_height - 50 or ball.rect.y < 0:
+            speed_y *= -1
+
+        if ball.rect.x < 0:
+            finish = True
+            window.blit(lose1, (200, 200))
+        
+        if ball.rect.x > win_width:
+            finish = True
+            window.blit(lose2, (200, 200))
+
+        if sprite.collide_rect(racket1, ball) or sprite.collide_rect(racket1, ball):
+            speed_x *= -1
     display.update()
     clock.tick(FPS)
+
